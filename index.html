@@ -1,199 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Quiz Junino - Arraiá Linguístico</title>
-  <style>
-    :root {
-      --cor-principal: #e63946;
-      --cor-secundaria: #f1faee;
-      --cor-fundo: #ffeaa7;
-    }
-
-    body {
-      font-family: 'Trebuchet MS', sans-serif;
-      background: var(--cor-fundo) url('https://i.imgur.com/m47Od5I.jpeg') repeat;
-      padding: 20px;
-      margin: 0;
-      box-sizing: border-box;
-    }
-
-    .container {
-      max-width: 750px;
-      margin: auto;
-      background-color: var(--cor-secundaria);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.2);
-    }
-
-    h1 {
-      color: var(--cor-principal);
-      text-align: center;
-      margin-bottom: 20px;
-      background: #f9c74f;
-      padding: 10px;
-      border-radius: 10px;
-    }
-
-    .question {
-      margin-bottom: 25px;
-      padding: 15px;
-      background: #fff3cd;
-      border-left: 6px solid #f08a5d;
-      border-radius: 6px;
-    }
-
-    .options label {
-      display: block;
-      margin: 8px 0;
-      cursor: pointer;
-    }
-
-    button {
-      padding: 12px 25px;
-      background-color: #e63946;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-      display: block;
-      margin: 0 auto;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background-color: #d62828;
-    }
-
-    #resultado {
-      margin-top: 30px;
-      text-align: center;
-      font-weight: bold;
-      font-size: 1.3em;
-      color: #264653;
-    }
-
-    @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
-
-      .container {
-        padding: 15px;
-      }
-
-      button {
-        width: 100%;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Junino - Arraiá Linguístico</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-  <div class="container">
-    <h1>🎉 Quiz Junino do Arraiá Linguístico 🎉</h1>
-    <div id="quiz-container"></div>
-    <button onclick="enviarRespostas()">Enviar Respostas</button>
-    <div id="resultado"></div>
-  </div>
+    <div class="container">
+        <h1>🎉 Quiz Junino do Arraiá Linguístico 🎉</h1>
+        <div id="quiz-container"></div>
+        <button onclick="enviarRespostas()">Enviar Respostas</button>
+        <div id="resultado"></div>
+    </div>
 
-  <script>
-    const quiz = [
-      {
-        enunciado: "Qual a cor do cavalo branco de Napoleão?",
-        alternativas: ["Verde", "Azul", "Branco"],
-        correta: "c"
-      },
-      {
-        enunciado: "Complete: Quem descobriu o Brasil? Pedro Álvares Ca...",
-        alternativas: ["bral", "brel", "bril"],
-        correta: "a"
-      },
-      {
-        enunciado: "Assinale a alternativa com a concordância verbal correta:",
-        alternativas: [
-          "Os aluno chegou atrasados.",
-          "As meninas foi embora cedo.",
-          "As crianças brincaram no parque."
-        ],
-        correta: "c"
-      },
-      {
-        enunciado: "Qual frase está no tempo verbal futuro do presente?",
-        alternativas: [
-          "Eu comi a sobremesa.",
-          "Nós viajaremos em julho.",
-          "Eles estavam estudando."
-        ],
-        correta: "b"
-      },
-      {
-        enunciado: "Escolha a alternativa com erro de concordância:",
-        alternativas: [
-          "As estrelas brilham no céu.",
-          "O cachorro latem toda noite.",
-          "As meninas dançaram quadrilha."
-        ],
-        correta: "b"
-      },
-      {
-        enunciado: "Em qual frase o verbo está no tempo presente?",
-        alternativas: [
-          "Eles estudaram para a prova.",
-          "Eu estudo todos os dias.",
-          "Nós viajaremos amanhã."
-        ],
-        correta: "b"
-      },
-      {
-        enunciado: "Qual das frases está correta quanto à concordância verbal?",
-        alternativas: [
-          "Os meninos correu na rua.",
-          "Você sabiam da novidade?",
-          "As crianças gostam de doce."
-        ],
-        correta: "c"
-      }
-    ];
-
-    const letras = ["a", "b", "c"];
-    const quizContainer = document.getElementById('quiz-container');
-
-    quiz.forEach((questao, index) => {
-      const div = document.createElement("div");
-      div.classList.add("question");
-
-      let html = `<p><strong>${index + 1}. ${questao.enunciado}</strong></p><div class="options">`;
-      questao.alternativas.forEach((alt, i) => {
-        html += `
-          <label>
-            <input type="radio" name="q${index}" value="${letras[i]}" />
-            ${letras[i]}) ${alt}
-          </label>
-        `;
-      });
-      html += `</div>`;
-      div.innerHTML = html;
-      quizContainer.appendChild(div);
-    });
-
-    function enviarRespostas() {
-      let acertos = 0;
-      quiz.forEach((questao, index) => {
-        const resposta = document.querySelector(`input[name="q${index}"]:checked`);
-        if (resposta && resposta.value === questao.correta) {
-          acertos++;
-        }
-      });
-
-      const porcentagem = (acertos / quiz.length) * 100;
-      document.getElementById("resultado").innerText =
-        `Você acertou ${acertos} de ${quiz.length} questões. Isso dá ${porcentagem.toFixed(1)}% de acerto! 🌽🎯`;
-    }
-  </script>
-
+    <script src="script.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,84 @@
+:root {
+  --cor-principal: #e63946;
+  --cor-secundaria: #f1faee;
+  --cor-fundo: #ffeaa7;
+}
+
+body {
+  font-family: 'Trebuchet MS', sans-serif;
+  background: var(--cor-fundo) url('https://i.imgur.com/m47Od5I.jpeg') repeat;
+  padding: 20px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 750px;
+  margin: auto;
+  background-color: var(--cor-secundaria);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.2);
+}
+
+h1 {
+  color: var(--cor-principal);
+  text-align: center;
+  margin-bottom: 20px;
+  background: #f9c74f;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.question {
+  margin-bottom: 25px;
+  padding: 15px;
+  background: #fff3cd;
+  border-left: 6px solid #f08a5d;
+  border-radius: 6px;
+}
+
+.options label {
+  display: block;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+button {
+  padding: 12px 25px;
+  background-color: #e63946;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  display: block;
+  margin: 0 auto;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #d62828;
+}
+
+#resultado {
+  margin-top: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3em;
+  color: #264653;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
